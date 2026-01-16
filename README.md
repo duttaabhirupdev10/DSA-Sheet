@@ -1,2 +1,2 @@
 # DSA-Sheet
-Here I solved the all DSA problems from Striver DSA Sheet
+Here, I am solving all the DSA problems from Striver’s DSA Sheet.
