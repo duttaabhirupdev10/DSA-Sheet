@@ -63,4 +63,4 @@ class Solution {
 
         return new int[]{-1, -1};
     }
-}
+}  //TC--->O(n)   , SC---->O(n)
