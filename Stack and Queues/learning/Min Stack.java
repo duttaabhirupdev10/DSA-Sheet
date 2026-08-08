@@ -67,3 +67,60 @@ class MinStack {
  */
 
 //optimal
+class MinStack {
+    private Stack<Long> st;
+    private int minEle;
+
+    public MinStack() {
+        st=new Stack<>();
+        minEle=-1;    
+    }
+    
+    public void push(int value) {
+        if(st.isEmpty()){
+            minEle=value;
+            st.push((long)value);
+        }
+        //if the new no. is less than the minimum element
+        else if(value < minEle){
+            st.push(2L*value-minEle);
+            minEle=value;
+        }
+        // if the new no. is greater than the minimum element
+        else{
+            st.push((long)value);
+        }
+    }
+    
+    public void pop() {
+        if(st.isEmpty()) return;
+        long top=st.pop();
+
+        //If top is an encoded value, minEle is the actual top and 
+        //minimum will change if the min element is removed
+        if(top < minEle){
+            minEle=(int) (2L* minEle - top);
+        }
+    }
+    
+    public int top() {
+        if(st.isEmpty()) return -1;
+        long top=st.peek();
+        //If top is an encoded value, minEle is the actual top
+        return (minEle > top) ? (int)minEle:(int)top;
+    }
+    
+    public int getMin() {
+        if(st.isEmpty()) return -1;
+        return (int)minEle;
+    }
+}                  ///TC---->O(1);      SC--->O(1)
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(value);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
