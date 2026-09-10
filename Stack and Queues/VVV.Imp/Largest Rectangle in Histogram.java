@@ -26,4 +26,31 @@ class Solution {
 }           //      TC--->O(N^2)   ,    SC--->O(1)
 
 //optimal-->monotonic stack
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int maxArea=0;
+        //Stack stotres(startIndex,height)
+        Stack<int[]> stack=new Stack<>();
+        for(int i=0;i<heights.length;i++){
+            int h=heights[i];
+            int start=i;
+            while(!stack.isEmpty() && stack.peek()[1]>h){
+                int[] popped= stack.pop();
+                int index=popped[0];
+                int height=popped[1];
 
+                maxArea=Math.max(maxArea,height*(i-index));
+                start=index;
+            }
+            stack.push(new int[]{start,h});
+        }
+        //calculate remaining rectangles
+        for(int[] item:stack){
+            int index=item[0];
+            int height=item[1];
+
+            maxArea=Math.max(maxArea,height*(heights.length-index));
+        }
+        return maxArea;
+    }
+}            //    TC--->O(N)   ,    Sc--->O(n)
